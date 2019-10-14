@@ -1,0 +1,34 @@
+
+port: "8000" #后端运行端口
+
+number: "1"
+
+rho: 0.4  #信息素蒸发系数
+q: 4  #信息素增加强度系数
+round: 20
+ant: 20
+update_round: 0
+alpha: 1
+gamma: 1.7
+
+path_threshold: 50
+
+get_neighbor_delay_round: 0
+data_size: 128
+
+request_relative_path: "/request"
+update_delay_relative_path: "/get_neighbor_delay"
+update_relative_path: "/update"
+response_relative_path: "/response"
+
+neighbor:
+  2:
+    url: "http://10.68.116.3:8000"
+    tau: 10
+    bandwidth: 6
+    delay: 1000
+  3:
+    url: "http://49.123.123.69:8000"
+    tau: 10
+    bandwidth: 7
+    delay: 1000
