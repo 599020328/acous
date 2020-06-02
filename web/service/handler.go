@@ -114,6 +114,24 @@ func UpdateHandler(c *gin.Context) {
 	c.JSON(200, gin.H{"code": -1, "message": "传入参数错误"})
 }
 
+//更新tau
+func UpdateDataHandler(c *gin.Context) {
+	req := UpdateDataReq{}
+	if err := c.BindJSON(&req); err == nil {
+		go func() {
+			er := HandleUpdateData(req)
+			if er != nil {
+				log.Println("handle update error :", er)
+			}
+		}()
+
+		c.JSON(200, gin.H{"code": 0, "message": "success"})
+		return
+	}
+
+	c.JSON(200, gin.H{"code": -1, "message": "传入参数错误"})
+}
+
 func LogConfig(c *gin.Context) {
 	reqData, er := json.Marshal(configure)
 	if er != nil {

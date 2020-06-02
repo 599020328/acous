@@ -24,6 +24,8 @@ func StartWebService(c *conf.Conf) {
 	router.POST("/response", ResultHandler)
 	router.POST("/update", UpdateHandler)
 
+	router.POST("/update_dest_data", UpdateDataHandler)
+
 	router.POST("/log_config", LogConfig)
 
 	router.POST("/test", TestSt)
