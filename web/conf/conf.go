@@ -29,6 +29,7 @@ type Conf struct {
 	UpdateDelayRelativePath string `yaml:"update_delay_relative_path"`
 	ResponseRelativePath    string `yaml:"response_relative_path"`
 	UpdateRelativePath      string `yaml:"update_relative_path"`
+	UpdateDataPath			string `yaml:"update_data_path"`
 
 	NeighborList map[string]Neighbor `yaml:"neighbor"`
 
