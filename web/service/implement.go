@@ -357,6 +357,7 @@ func SourceNodeHandleResponse(req DestNodeReq) error {
 				log.Println("log path convergence result error, err :", er)
 			}
 
+			UpdateData(req.DestNumber)					//todo send result to dest node and update the data
 			return beginNewNodeFound(nextReq)
 		} else {
 			if req.Round+1 >= configure.Round {
@@ -433,7 +434,7 @@ func RecordAntResult(req DestNodeReq) error {
 			log.Println("close file error :", err)
 		}
 	}()
-
+		//todo update data
 	result, err := f.WriteString(fmt.Sprintf("dest number: %s; round num: %d; ant num: %d; is success: %v; "+
 		"is last round: %v; is last ant: %v \n 	path: %s\n 	path_cost: %f\n 	path_detail:%s\n", req.DestNumber,
 		req.Round, req.AntNumber, req.IsSuccess, req.IsLastRound, req.IsLastAnt, req.Path, req.PathDelay,
@@ -600,4 +601,27 @@ func startUpdateTask(freqOnMinute int32) {
 			break
 		}
 	}
+}
+
+//发送处理请求到目标节点
+func UpdateData(destNum string) {
+	updateDataReq := UpdateDataReq{DataDelta:""}			//todo get real world now node data, and data type
+
+	_, err := requestNodeByUrl(updateDataReq, configure.NeighborList[destNum].Url+configure.UpdateDataPath)
+	if err != nil {
+		log.Println("update node ", destNum, "data error, error :", err)
+	}
+}
+
+//更新目标节点数据
+func HandleUpdateData(req UpdateDataReq) error {
+	nowData := ""		//todo get real world now node data, and data type
+
+	nowData = XOR(nowData, req.DataDelta)	//todo flush newest data to disk
+
+	return nil
+}
+
+func XOR(data, delta string) string {
+	return data + delta		//todo compute real world result
 }
