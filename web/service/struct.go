@@ -62,3 +62,7 @@ type TestReq struct {
 	TimeStampNano int64  `json:"time_stamp_nano"`
 	NextURL       string `json:"next_url"`
 }
+
+type UpdateDataReq struct {
+	DataDelta string	`json:"data_delta"`
+}
