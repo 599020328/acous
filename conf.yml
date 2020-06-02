@@ -20,6 +20,7 @@ request_relative_path: "/request"
 update_delay_relative_path: "/get_neighbor_delay"
 update_relative_path: "/update"
 response_relative_path: "/response"
+update_data_path: "/update_dest_data"
 
 neighbor:
   2:
